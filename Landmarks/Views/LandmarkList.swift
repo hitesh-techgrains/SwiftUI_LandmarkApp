@@ -28,7 +28,6 @@ struct LandmarkList: View {
                   Toggle(isOn: $showFavoritesOnly){
                       Text("Favorites Only")
                   }
-                  
                   ForEach(filteredLandmarks,id: \.id) { landmark in
                       NavigationLink{
                           LandmarkDetail(landmark: landmark)
@@ -39,7 +38,24 @@ struct LandmarkList: View {
                   }
                   .animation(.default, value: filteredLandmarks)
                   .navigationTitle("Landmarks")
+               
               }
+              .toolbar {
+                  ToolbarItem(placement: .navigationBarTrailing) {
+                          Menu {
+                              NavigationLink{
+                                  CategoryHome()
+                              }
+                              label:{
+                                  Text("Category")
+                              }
+                              
+                          } label: {
+                              Image(systemName: "ellipsis")
+                                  .rotationEffect(.degrees(90)) // vertical ellipsis
+                          }
+                      }
+                     }
 
           } detail: {
               Text("Select a Landmark")
