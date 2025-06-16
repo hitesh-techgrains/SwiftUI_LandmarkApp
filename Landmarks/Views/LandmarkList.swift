@@ -29,12 +29,9 @@ struct LandmarkList: View {
                       Text("Favorites Only")
                   }
                   ForEach(filteredLandmarks,id: \.id) { landmark in
-                      NavigationLink{
-                          LandmarkDetail(landmark: landmark)
-                      }
-                      label:{
+                      NavigationLink(destination: LandmarkDetail(landmark: landmark)) {
                           LandmarkRow(landmark: landmark)
-                      }
+                        }
                   }
                   .animation(.default, value: filteredLandmarks)
                   .navigationTitle("Landmarks")
