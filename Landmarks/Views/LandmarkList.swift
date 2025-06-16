@@ -37,22 +37,6 @@ struct LandmarkList: View {
                   .navigationTitle("Landmarks")
                
               }
-              .toolbar {
-                  ToolbarItem(placement: .navigationBarTrailing) {
-                          Menu {
-                              NavigationLink{
-                                  CategoryHome()
-                              }
-                              label:{
-                                  Text("Category")
-                              }
-                              
-                          } label: {
-                              Image(systemName: "ellipsis")
-                                  .rotationEffect(.degrees(90)) // vertical ellipsis
-                          }
-                      }
-                     }
 
           } detail: {
               Text("Select a Landmark")
