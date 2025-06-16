@@ -5,15 +5,11 @@ import SwiftUI
 struct CategoryHome: View {
     
     @Environment(ModelData.self) var modelData
+    @State private var showingProfile = false
 
     var body: some View {
         NavigationView {
             List {
-                    Text("Featured")
-                    .font(.title)
-                    .fontWeight(Font.Weight.semibold)
-                    .listRowSeparator(Visibility.hidden)
-                
                 modelData.features[0].image
                     .resizable()
                     .scaledToFill()
@@ -24,7 +20,19 @@ struct CategoryHome: View {
                     ForEach(modelData.categories.keys.sorted(), id: \.self) { key in
                         CategoryRow(categoryName: key, items: modelData.categories[key]!)
                     }
+                
                     .navigationTitle("Featured")
+                }
+            .toolbar {
+                Button {
+                showingProfile.toggle()
+                } label: {
+                Label("User Profile", systemImage: "person.crop.circle")
+                }
+                }
+                .sheet(isPresented: $showingProfile) {
+                ProfileHost()
+                .environment(modelData)
                 }
         }
     }

@@ -18,7 +18,6 @@
 		848CDCF82DF855EE00E4DB8C /* twinlake@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 848CDCE92DF855EE00E4DB8C /* twinlake@2x.jpg */; };
 		848CDCF92DF855EE00E4DB8C /* rainbowlake@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 848CDCE62DF855EE00E4DB8C /* rainbowlake@2x.jpg */; };
 		848CDCFA2DF855EE00E4DB8C /* lakemcdonald@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 848CDCE52DF855EE00E4DB8C /* lakemcdonald@2x.jpg */; };
-		848CDCFC2DF855EE00E4DB8C /* chincoteague@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 848CDCE22DF855EE00E4DB8C /* chincoteague@2x.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -286,7 +285,6 @@
 				848CDCF82DF855EE00E4DB8C /* twinlake@2x.jpg in Resources */,
 				848CDCF92DF855EE00E4DB8C /* rainbowlake@2x.jpg in Resources */,
 				848CDCFA2DF855EE00E4DB8C /* lakemcdonald@2x.jpg in Resources */,
-				848CDCFC2DF855EE00E4DB8C /* chincoteague@2x.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,9 +1,13 @@
+/*
+See the LICENSE.txt file for this sample’s licensing information.
+
+Abstract:
+Size, position, and other information used to draw a badge.
+*/
+
 import CoreGraphics
 
-
-
 struct HexagonParameters {
-
     struct Segment {
         let line: CGPoint
         let curve: CGPoint
@@ -37,12 +41,10 @@ struct HexagonParameters {
             curve:   CGPoint(x: 1.00, y: 0.70 - adjustment),
             control: CGPoint(x: 1.00, y: 0.75 - adjustment)
         ),
-
         Segment(
             line:    CGPoint(x: 1.00, y: 0.30 + adjustment),
             curve:   CGPoint(x: 0.95, y: 0.20 + adjustment),
-            control: CGPoint(x: 1.00, y: 0.25 + adjustment))
-
+            control: CGPoint(x: 1.00, y: 0.25 + adjustment)
+        )
     ]
-
 }
