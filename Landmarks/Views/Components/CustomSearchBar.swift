@@ -28,23 +28,6 @@ struct CustomSearchBar: View {
             .padding(10)
             .background(Color(.systemGray6))
             .cornerRadius(10)
-            
-            Menu {
-                    Button {
-                       sortOrder = .az
-                    } label: {
-                    Label("A to Z", systemImage: sortOrder == .az ? "checkmark" : "")
-                    }
-                    Button {
-                    sortOrder = .za
-                    } label: {
-                    Label("Z to A", systemImage: sortOrder == .za ? "checkmark" : "")
-                    }
-                    } label: {
-                    Image(systemName: "ellipsis")
-                    .rotationEffect(.degrees(90))
-                    .font(.title2)
-                    }
         }
         .padding(.leading)
         

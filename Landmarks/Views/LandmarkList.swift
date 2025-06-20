@@ -10,11 +10,9 @@ struct LandmarkList: View {
     
     
     var filteredLandmarks: [Landmark] {
-
         modelData.landmarks.filter { landmark in
               (!showFavoritesOnly || landmark.isFavorite)
           }
-
       }
     
     var filteredItems: [Landmark] {
@@ -40,7 +38,6 @@ struct LandmarkList: View {
     
     
     var body: some View {
-
           NavigationSplitView {
               VStack {
                   Text("Landmarks")
@@ -48,10 +45,23 @@ struct LandmarkList: View {
                       .fontWeight(.semibold)
                       .padding(.top, 10)
                   
+                  Section(header: EmptyView()){
                       CustomSearchBar(searchText: $searchText,sortOrder: $sortOrder)
                           .padding(.bottom, 10)
                           .padding(.trailing, 10)
+                  }
+
                   
+                  Section(header: EmptyView()) {
+                      Toggle(isOn: $showFavoritesOnly){
+                          Text("Favorites Only")
+                      }
+                      .tint(.blue)
+                      .listRowInsets(EdgeInsets()) // removes padding
+                      .listRowBackground(Color.clear)
+                      .padding(.horizontal)
+                      .listRowSeparator(.hidden)
+                  }
             
                   if filteredItems.isEmpty {
                       VStack {
@@ -63,18 +73,18 @@ struct LandmarkList: View {
                          }
                          .frame(maxWidth: .infinity, maxHeight: .infinity)
                   }
-                  else {List{
-                      Toggle(isOn: $showFavoritesOnly){
-                          Text("Favorites Only")
-                      }
+                  else {
+                      List{
                       ForEach(filteredItems,id: \.id) { landmark in
                           NavigationLink(destination: LandmarkDetail(landmark: landmark)) {
                               LandmarkRow(landmark: landmark)
                           }
+                          
                       }
                       .animation(.default, value: filteredLandmarks)
                       
                   }
+                      .listStyle(.plain)
                   }
               }
 
