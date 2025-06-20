@@ -1,10 +1,3 @@
-//
-//  LandmarkList.swift
-//  Landmarks
-//
-//  Created by admin on 12/06/25.
-//
-
 import SwiftUI
 
 struct LandmarkList: View {
@@ -12,6 +5,8 @@ struct LandmarkList: View {
     @Environment(ModelData.self) var modelData
     @State private var showFavoritesOnly = false
     @State private var searchText = ""
+    @State private var sortOrder: SortOrder = .az
+
     
     
     var filteredLandmarks: [Landmark] {
@@ -24,12 +19,23 @@ struct LandmarkList: View {
     
     var filteredItems: [Landmark] {
         let trimmedSearchText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-        
-           if trimmedSearchText.isEmpty {
-               return filteredLandmarks
-           } else {
-               return filteredLandmarks.filter { $0.name.localizedCaseInsensitiveContains(trimmedSearchText) }
-           }
+
+            // Step 1: Filter
+            var results = trimmedSearchText.isEmpty
+                ? filteredLandmarks
+                : filteredLandmarks.filter {
+                    $0.name.localizedCaseInsensitiveContains(trimmedSearchText)
+                }
+
+            // Step 2: Sort
+            switch sortOrder {
+            case .az:
+                results.sort { $0.name < $1.name }
+            case .za:
+                results.sort { $0.name > $1.name }
+            }
+
+            return results
        }
     
     
@@ -41,8 +47,11 @@ struct LandmarkList: View {
                       .font(.title)
                       .fontWeight(.semibold)
                       .padding(.top, 10)
-                  CustomSearchBar(searchText: $searchText)
-                      .padding(.bottom, 10)
+                  
+                      CustomSearchBar(searchText: $searchText,sortOrder: $sortOrder)
+                          .padding(.bottom, 10)
+                          .padding(.trailing, 10)
+                  
             
                   if filteredItems.isEmpty {
                       VStack {
@@ -68,7 +77,6 @@ struct LandmarkList: View {
                   }
                   }
               }
-              //.searchable(text: $searchText, prompt: "Search fruits")
 
           } detail: {
               Text("Select a Landmark")
