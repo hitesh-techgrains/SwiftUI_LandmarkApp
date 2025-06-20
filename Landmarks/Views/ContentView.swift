@@ -14,6 +14,10 @@ struct ContentView: View {
         case featured
         case list
     }
+    
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor.white
+    }
 
 
     var body: some View {

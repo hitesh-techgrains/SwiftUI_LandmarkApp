@@ -11,6 +11,7 @@ struct LandmarkList: View {
    
     @Environment(ModelData.self) var modelData
     @State private var showFavoritesOnly = false
+    @State private var searchText = ""
     
     
     var filteredLandmarks: [Landmark] {
@@ -21,22 +22,53 @@ struct LandmarkList: View {
 
       }
     
+    var filteredItems: [Landmark] {
+        let trimmedSearchText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+           if trimmedSearchText.isEmpty {
+               return filteredLandmarks
+           } else {
+               return filteredLandmarks.filter { $0.name.localizedCaseInsensitiveContains(trimmedSearchText) }
+           }
+       }
+    
+    
     var body: some View {
 
           NavigationSplitView {
-              List{
-                  Toggle(isOn: $showFavoritesOnly){
-                      Text("Favorites Only")
+              VStack {
+                  Text("Landmarks")
+                      .font(.title)
+                      .fontWeight(.semibold)
+                      .padding(.top, 10)
+                  CustomSearchBar(searchText: $searchText)
+                      .padding(.bottom, 10)
+            
+                  if filteredItems.isEmpty {
+                      VStack {
+                         Spacer()
+                         Text("No Data Found")
+                         .font(.headline)
+                         .foregroundColor(.gray)
+                         Spacer()
+                         }
+                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                   }
-                  ForEach(filteredLandmarks,id: \.id) { landmark in
-                      NavigationLink(destination: LandmarkDetail(landmark: landmark)) {
-                          LandmarkRow(landmark: landmark)
-                        }
+                  else {List{
+                      Toggle(isOn: $showFavoritesOnly){
+                          Text("Favorites Only")
+                      }
+                      ForEach(filteredItems,id: \.id) { landmark in
+                          NavigationLink(destination: LandmarkDetail(landmark: landmark)) {
+                              LandmarkRow(landmark: landmark)
+                          }
+                      }
+                      .animation(.default, value: filteredLandmarks)
+                      
                   }
-                  .animation(.default, value: filteredLandmarks)
-                  .navigationTitle("Landmarks")
-               
+                  }
               }
+              //.searchable(text: $searchText, prompt: "Search fruits")
 
           } detail: {
               Text("Select a Landmark")
