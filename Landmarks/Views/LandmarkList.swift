@@ -47,8 +47,6 @@ struct LandmarkList: View {
                   
                   Section(header: EmptyView()){
                       CustomSearchBar(searchText: $searchText,sortOrder: $sortOrder)
-                          .padding(.bottom, 10)
-                          .padding(.trailing, 10)
                   }
 
                   
